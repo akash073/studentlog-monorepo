@@ -77,64 +77,22 @@
     }
   ],
   "roles": {
-    "realm": [
-      {
-        "name": "student",
-        "description": "Student privileges"
-      },
-      {
-        "name": "teacher",
-        "description": "Teacher privileges"
-      },
-      {
-        "name": "admin",
-        "description": "Administrator privileges"
-      }
-    ],
+
     "client" : {
       "next-client" : [
         {
-          "name": "manage-account",
-          "description": "Allows application-initiated actions."
+          "name": "student",
+          "description": "Student privileges"
         },
         {
-          "name": "customer-user",
-          "description": "Have Customer User privileges"
+          "name": "teacher",
+          "description": "Teacher privileges"
         },
         {
-          "name": "customer-admin",
-          "description": "Have Customer Admin privileges"
-        },
-        {
-          "name": "sample-client-role",
-          "description": "Sample client role",
-          "attributes": {
-            "sample-client-role-attribute": [
-              "sample-client-role-attribute-value"
-            ]
-          }
-        },
-        {
-          "name": "customer-admin-composite-role",
-          "description": "Have Customer Admin privileges via composite role",
-          "composite" : true,
-          "composites" : {
-            "realm" : [ "customer-user-premium" ],
-            "client" : {
-              "test-app" : [ "customer-admin" ]
-            }
-          }
+          "name": "admin",
+          "description": "Administrator privileges"
         }
-      ],
-      "test-app-scope" : [
-        {
-          "name": "test-app-allowed-by-scope",
-          "description": "Role allowed by scope in test-app-scope"
-        },
-        {
-          "name": "test-app-disallowed-by-scope",
-          "description": "Role disallowed by scope in test-app-scope"
-        }
+
       ]
     }
   },
