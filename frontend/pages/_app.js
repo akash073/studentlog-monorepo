@@ -44,7 +44,7 @@ function parseCookies(req) {
 
 MyApp.getInitialProps = async (context) => {
   // Extract cookies from AppContext
-  const appProps = await App.getInitialProps(context)
+  const appProps = await App.getPageProps(context)
   return {
     ...appProps,
     cookies: parseCookies(context?.ctx?.req)
