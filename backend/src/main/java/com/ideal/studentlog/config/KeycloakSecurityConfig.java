@@ -103,7 +103,7 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
                 .hasAnyRole("MANAGER","ACTOR");*/
       //  expressionInterceptUrlRegistry = expressionInterceptUrlRegistry.antMatchers("/iam/accounts/actor/*").hasRole("ACTOR");
 
-        expressionInterceptUrlRegistry.anyRequest().authenticated();
+        expressionInterceptUrlRegistry.anyRequest().permitAll();
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })

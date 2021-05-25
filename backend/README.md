@@ -26,3 +26,8 @@ http://localhost:8180/auth/admin/realms/MyMarketplace/users
 with access token in header and "enabled": true, "username": "user" body. make sure your enabled boolean 
 look like this one and dont use "" I think keycloak reads your request as String.
 
+5. Sample json export manual
+
+https://github.com/keycloak/keycloak/blob/master/testsuite/integration-arquillian/tests/base/src/test/resources/testrealm.json
+
+

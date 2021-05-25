@@ -21,10 +21,8 @@
           "value": "student"
         }
       ],
-      "realmRoles": [
-        "student"
-      ],
       "clientRoles": {
+        "next-client": [ "student" ],
         "account": [
           "view-profile",
           "manage-account"
@@ -43,10 +41,8 @@
           "value": "teacher"
         }
       ],
-      "realmRoles": [
-        "teacher"
-      ],
       "clientRoles": {
+        "next-client": [ "teacher" ],
         "account": [
           "view-profile",
           "manage-account"
@@ -65,14 +61,13 @@
           "value": "admin"
         }
       ],
-      "realmRoles": [
-        "admin"
-      ],
       "clientRoles": {
+        "next-client": [ "admin" ],
         "account": [
           "view-profile",
           "manage-account"
-        ]
+        ],
+        "realm-management": ["manage-users"]
       }
     }
   ],
