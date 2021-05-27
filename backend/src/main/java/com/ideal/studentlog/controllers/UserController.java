@@ -27,6 +27,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+* Keycloak admin client details can be found
+* https://www.youtube.com/watch?v=tDOUbFfsHf0
+*/
 
 @RequestMapping(value = "/users")
 @RestController

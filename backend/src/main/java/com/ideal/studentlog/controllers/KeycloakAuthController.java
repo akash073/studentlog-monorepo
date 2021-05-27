@@ -4,16 +4,13 @@ package com.ideal.studentlog.controllers;
 import com.ideal.studentlog.services.KeycloakRestService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +25,9 @@ public class KeycloakAuthController {
 
     @Value("${keycloak-user-info-uri}")
     private String keycloakUserInfo;
+
+    @Value("${keycloak-user-creation-uri}")
+    private String keycloakCreateUserEndPoint;
 
     @Autowired
     private KeycloakRestService keycloakRestService;
@@ -46,5 +46,39 @@ public class KeycloakAuthController {
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(null, headers);
         return restTemplate.postForObject(keycloakUserInfo, request, String.class);
+    }
+
+    @Operation(summary = "Provide username to create user")
+    @PostMapping(path = "/{name}")
+    public String createUser(HttpServletRequest httpServletRequest, @PathVariable("name") String name) {
+        String token = httpServletRequest.getHeader("Authorization");
+/*
+        MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+        headers.add("Authorization", token);
+        headers.add("Content-Type", "application/json");
+*/
+
+        // create request body
+        JSONObject request = new JSONObject();
+        request.put("username", name);
+     //   request.put("password", password);
+
+        // set headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        headers.add("Authorization", token);
+        HttpEntity<String> entity = new HttpEntity<String>(request.toString(), headers);
+
+        // send request and parse result
+        ResponseEntity<String> loginResponse = restTemplate
+                .exchange(keycloakCreateUserEndPoint, HttpMethod.POST, entity, String.class);
+
+      /*  MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+        body.add("username", name);
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(body, headers);
+        ResponseEntity<Void> response =  restTemplate.postForEntity(keycloakCreateUserEndPoint, request, Void.class);
+*/
+        return "User created successfully";
     }
 }
